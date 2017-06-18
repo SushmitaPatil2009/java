@@ -1,0 +1,31 @@
+<web-app>
+	<display-name>SM</display-name>
+
+	<context-param>
+		<param-name>log4j-config-location</param-name>
+		<param-value>resources/log4j2.xml</param-value>
+	</context-param>
+	<servlet>
+		<servlet-name>jersey-servlet</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer
+		</servlet-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>com.sm</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jersey.config.server.provider.classnames</param-name>
+			<param-value>com.sm.security.SecurityCheck,
+				com.sm.logger.SMLogger,
+				org.glassfish.jersey.media.multipart.MultiPartFeature,
+				com.sm.filter.CorsFilter
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>jersey-servlet</servlet-name>
+		<url-pattern>/api/v1/*</url-pattern>
+	</servlet-mapping>
+</web-app>
